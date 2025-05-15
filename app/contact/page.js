@@ -28,23 +28,38 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
 
-    toast("Message sent successfully", {
-      description: "We'll get back to you as soon as possible",
-      action: {
-        label: "Close",
-        onClick: () => console.log("Close"),
-      },
-    });
+      const formData = new FormData(e.target);
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
-    setIsSubmitting(false)
+      formData.append("access_key", process.env.NEXT_PUBLIC_WEB3_FORM_API_KEY);
+
+      const response = await fetch(process.env.NEXT_PUBLIC_WEB3_FORM_API_URL, {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      toast("Message sent successfully", {
+        description: "We'll get back to you as soon as possible",
+        action: {
+          label: "Close",
+          onClick: () => console.log("Close"),
+        },
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+
+    } catch (error) {
+      toast("Error occured while submitting the form");
+    }
+    finally { setIsSubmitting(false) }
   }
 
   return (
