@@ -1,21 +1,17 @@
 {
-  "name": "server",
+  "name": "talk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "go": "concurrently \"cd client && pnpm run dev\" \"cd server && pnpm run start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "mongoose": "^8.14.3"
+    "concurrently": "^9.1.2"
   }
 }
