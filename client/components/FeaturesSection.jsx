@@ -9,7 +9,7 @@ export function FeaturesSection() {
 
   return (
     <div className="py-20 lg:py-40" id="Core-Functionalities">
-      <h1 className="text-4xl font-bold mb-15 text-center">
+      <h1 className="text-4xl font-bold mb-15 text-accent-foreground text-center">
         Core Functionalities
       </h1>
 
@@ -22,7 +22,7 @@ export function FeaturesSection() {
             <div
               key={feature.title}
               id={`feature-number-${idx}`}
-              className={`relative bg-card text-card-foreground p-6 rounded-3xl overflow-hidden transition duration-300 ${
+              className={`relative bg-card text-accent-foreground p-6 rounded-3xl overflow-hidden transition duration-300 ${
                 isBlurred ? "blur-xs" : "blur-0"
               }`}
               onMouseEnter={() => setHoveredIndex(idx)}

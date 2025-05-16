@@ -8,7 +8,7 @@ export function TelegramBotPromo() {
       <div className="flex flex-col md:flex-row gap-2">
         {/* Text and Button */}
         <div className="w-full md:w-3/5">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl text-accent-foreground font-bold mb-4">
             Chat with the AI Bot on Telegram
           </h2>
           <p className="text-muted-foreground mb-6">

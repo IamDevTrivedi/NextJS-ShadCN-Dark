@@ -146,7 +146,7 @@ const Footer = () => {
                 <a
                   key={idx}
                   href={social.href}
-                  className="bg-background hover:bg-muted p-2 rounded-md transition-colors border border-slate-800"
+                  className="bg-background hover:bg-muted p-2 rounded-md transition-colors border border-muted"
                   aria-label={social.label}
                 >
                   {social.icon}
