@@ -1,7 +1,7 @@
 // index.js : Main entry point for the application
 
 import express from 'express';
-import config from './config.js';
+import config from './config/config.js';
 import connectDB from './db/connect.db.js';
 import logger from './utils/logger.utils.js';
 
@@ -16,11 +16,16 @@ app.get("/", (req, res) => {
         req
     });
 
-    res.send("Talkasauras Server is running!");
+    res.send("Talkasauras Web version Server is running!");
 });
 
 import healthRouter from './routes/health.route.js';
-app.use('/health', healthRouter);
+import authRoutes from "./routes/authRoutes.route.js"
+app.use('/api/v1/health', healthRouter);
+
+
+
+app.use("/api/v1/auth", authRoutes);
 
 app.listen(config.PORT, () => {
     logger.info({
