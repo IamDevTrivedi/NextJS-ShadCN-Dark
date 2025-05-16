@@ -3,7 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 :root {
   --background: oklch(0.99 0 0);
   --foreground: oklch(0 0 0);
@@ -151,7 +150,6 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -161,11 +159,9 @@
   }
 }
 
-
 html {
   scroll-behavior: smooth;
 }
-
 
 ::-webkit-scrollbar {
   width: 4px;
