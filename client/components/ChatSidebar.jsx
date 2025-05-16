@@ -30,22 +30,22 @@ const usersChat = [
   {
     SidebarGroupLabel: "Today",
     items: [
-      { name: "t-1", href: "/t-1" },
-      { name: "t-2", href: "/t-2" },
+      { name: "t-1", href: "/chat/t-1" },
+      { name: "t-2", href: "/chat/t-2" },
     ],
   },
   {
     SidebarGroupLabel: "Last 7 days",
     items: [
-      { name: "7-1", href: "/7-1" },
-      { name: "7-2", href: "/7-2" },
+      { name: "7-1", href: "/chat/7-1" },
+      { name: "7-2", href: "/chat/7-2" },
     ],
   },
   {
     SidebarGroupLabel: "Last 30 Days",
     items: [
-      { name: "30-1", href: "/30-1" },
-      { name: "30-2", href: "/30-2" },
+      { name: "30-1", href: "/chat/30-1" },
+      { name: "30-2", href: "/chat/30-2" },
     ],
   },
 ];

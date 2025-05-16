@@ -4,9 +4,9 @@ import { ChatSidebar } from "@/components/ChatSidebar"
 export default function Layout({ children }) {
     return (
         <SidebarProvider>
-                <ChatSidebar />
+            <ChatSidebar />
             <main className="w-screen">
-            <SidebarTrigger />
+                <SidebarTrigger />
                 {children}
             </main>
         </SidebarProvider>

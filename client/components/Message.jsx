@@ -1,17 +1,23 @@
-import React from "react";
+"use client";
 
-export default function Message({ sender, text }) {
-  const isUser = sender === "You";
+export function Message({ text, sender, date }) {
+  const formattedTime = new Date(date).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div
-        className={`rounded-xl px-4 py-2 max-w-xs ${
-          isUser ? "bg-blue-600 text-white" : "bg-gray-200 text-black"
+    <div
+      className={`my-2 px-4 py-2 rounded-2xl max-w-xs 
+        ${
+          sender === "user"
+            ? "bg-accent text-accent-foreground self-end"
+            : "bg-accent text-accent-foreground self-start"
         }`}
-      >
-        <p className="text-sm font-semibold">{sender}</p>
-        <p>{text}</p>
+    >
+      <div>{text}</div>
+      <div className="text-xs text-muted-foreground mt-1 text-right">
+        {formattedTime}
       </div>
     </div>
   );

@@ -1,32 +1,39 @@
-"use client"
-
-import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
+"use client";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { SendHorizonal } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { SendIcon } from "lucide-react";
 
 export default function ChatInputArea() {
-  const [message, setMessage] = useState("");
+  const [input, setInput] = useState("");
 
-  const handleSend = () => {
-    if (message.trim()) {
-      console.log("Send message:", message);
-      setMessage("");
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    alert(`You typed: ${input}`);
+    setInput("");
   };
 
   return (
-    <div className="p-4 border-t bg-white flex gap-2">
+    <form
+      onSubmit={handleSubmit}
+      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-card border border-border rounded-xl shadow-md w-full max-w-4xl flex items-center gap-2 p-2"
+    >
       <Input
-        className="flex-1"
-        placeholder="Type a message..."
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSend()}
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Type your message..."
+        className="flex-grow border-0 bg-transparent"
       />
-      <Button onClick={handleSend}>
-        <SendHorizonal className="h-4 w-4" />
+
+      <Button
+        type="submit"
+        className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+      >
+        <SendIcon size={16} />
+        Send
       </Button>
-    </div>
+    </form>
   );
 }
