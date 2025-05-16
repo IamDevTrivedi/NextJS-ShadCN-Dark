@@ -9,6 +9,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Mail, MapPin, Phone } from "lucide-react"
 import { toast } from "sonner"
+import { ArrowLeft } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -62,21 +64,35 @@ export default function ContactPage() {
     finally { setIsSubmitting(false) }
   }
 
+  const router = useRouter();
+
   return (
     <div className="container mx-auto py-10 px-4 space-y-8">
       {/* Header Section */}
-      <div className="space-y-2 flex items-center justify-center flex-col">
-        <h1 className="text-4xl font-bold tracking-tight">Contact Us</h1>
-        <p className="text-muted-foreground">We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-        </p>
-      </div>
+      <header className="flex items-center">
+        <Button
+          variant="ghost"
+          onClick={() => router.back()}
+          className="mr-4"
+          aria-label="Go back"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+
+        <div className="flex-1 text-center">
+          <h1 className="text-4xl font-bold tracking-tight">Contact Us</h1>
+          <p className="text-muted-foreground">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+
+        <div className="w-10" />
+      </header>
 
       <Separator className={"mb-4"} />
 
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Contact Information Cards */}
-        <div className="space-y-2">
+        <div className="space-y-11">
           {/* Email Card */}
           <Card className="border bg-card text-card-foreground">
             <CardContent className="">
@@ -86,7 +102,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-medium text-md">Email</h3>
-                  <p className="text-primary">hello@talkasaurus.example.com</p>
+                  <p className="text-primary">devtrivedi.work@gmail.com</p>
                 </div>
               </div>
             </CardContent>
@@ -116,26 +132,13 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-medium text-md">Address</h3>
-                  <p className="text-primary">123 Dino Street, Suite 200</p>
-                  <p className="text-muted-foreground">San Francisco, CA 94107</p>
+                  <p className="text-primary">DA-IICT Road,</p>
+                  <p className="text-muted-foreground">Gandhinagar 382 007, Gujarat, India</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Support Information */}
-          <Card className="border bg-card text-card-foreground">
-            <CardHeader className="">
-              <CardTitle>Support</CardTitle>
-              <CardDescription>Get help from our team</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-foreground">For technical support:</p>
-              <p className="text-primary font-medium">support@talkasaurus.example.com</p>
-              <p className="text-foreground mt-4">For enterprise solutions:</p>
-              <p className="text-primary font-medium">enterprise@talkasaurus.example.com</p>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Contact Form */}

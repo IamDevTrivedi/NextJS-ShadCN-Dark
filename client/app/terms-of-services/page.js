@@ -1,13 +1,35 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { ArrowLeft } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function TermsOfServicePage() {
+
+    const router = useRouter();
+
     return (
         <div className="container mx-auto py-10 px-4 space-y-8">
-            <div className="space-y-2 flex items-center justify-center flex-col">
-                <h1 className="text-4xl font-bold tracking-tight">Terms of Service</h1>
-                <p className="text-muted-foreground">Last updated: May 15, 2025</p>
-            </div>
+            <header className="flex items-center">
+                <Button
+                    variant="ghost"
+                    onClick={() => router.back()}
+                    className="mr-4"
+                    aria-label="Go back"
+                >
+                    <ArrowLeft className="h-5 w-5" />
+                </Button>
+
+                <div className="flex-1 text-center">
+                    <h1 className="text-4xl font-bold tracking-tight">Terms of Service</h1>
+                    <p className="text-muted-foreground">Last updated: May 15, 2025</p>
+                </div>
+
+                <div className="w-10" />
+            </header>
 
             <Separator className="my-6" />
 
@@ -151,17 +173,16 @@ export default function TermsOfServicePage() {
 
             <Card className="border bg-card text-card-foreground">
                 <CardHeader>
-                    <CardTitle>Contact Us</CardTitle>
+                    <CardTitle>for Any legal issues, Kindly contact us.</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-foreground leading-7">
-                        If you have any questions about these Terms, please contact us at:
-                    </p>
-                    <address className="not-italic mt-2 text-muted-foreground">
-                        <div>Talkasaurus Inc.</div>
-                        <div>legal@talkasaurus.example.com</div>
-                        <div>123 AI Avenue, San Francisco, CA 94105</div>
-                    </address>
+                    <Button
+                        size={"lg"}
+                    >
+                        <Link
+                            href={"/contact"}
+                        >Contant Us</Link>
+                    </Button>
                 </CardContent>
             </Card>
         </div>
