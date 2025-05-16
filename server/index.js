@@ -16,16 +16,17 @@ app.get("/", (req, res) => {
         req
     });
 
-    res.send("Talkasauras Web version Server is running!");
+    res.send("Talkasauras_Web Server is running!");
 });
 
 import healthRouter from './routes/health.route.js';
-import authRoutes from "./routes/authRoutes.route.js"
 app.use('/api/v1/health', healthRouter);
 
-
-
+import authRoutes from "./routes/authRoutes.route.js"
 app.use("/api/v1/auth", authRoutes);
+
+
+
 
 app.listen(config.PORT, () => {
     logger.info({
