@@ -8,15 +8,20 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
 } from "@/components/ui/sidebar";
+
 import Link from "next/link";
-import { ChatFooterDD } from "./ChatFooterDD";
+
+import { ChatSidebarFooter } from "./ChatSidebarFooterDD";
+
 import { Button } from "./ui/button";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { MoreVertical } from "lucide-react";
 
 
@@ -110,7 +115,7 @@ export function ChatSidebar() {
       </SidebarContent>
 
       <SidebarFooter>
-        <ChatFooterDD />
+        <ChatSidebarFooter />
       </SidebarFooter>
     </Sidebar>
   );

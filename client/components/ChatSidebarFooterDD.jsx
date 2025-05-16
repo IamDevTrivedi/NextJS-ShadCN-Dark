@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,12 +11,24 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function ChatFooterDD() {
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar"
+
+export function ChatSidebarFooter() {
     return (
         <DropdownMenu className="outline-none focus:ring-0">
-            <DropdownMenuTrigger asChild>
-                <Button className="outline-none focus:ring-0" variant="secondary">
-                    Open
+            <DropdownMenuTrigger asChild  >
+
+                <Button className="w-full flex items-center justify-around px-5 outline-none focus:ring-0" variant="secondary">
+                    <Avatar className={"my-1"}>
+                        <AvatarFallback className={"bg-background"} >CN</AvatarFallback>
+                    </Avatar>
+                    <span>
+                        [--User's Name]
+                    </span>
                 </Button>
             </DropdownMenuTrigger>
 
