@@ -235,6 +235,36 @@ const authController = {
       });
     }
   },
+
+  logout: async (req, res) => {
+    logger.post({
+      message: "api > v1 > auth > logout",
+      req,
+    });
+
+    try {
+      res.clearCookie("token", {
+        httpOnly: true,
+        secure: config.NODE_ENV === "production",
+        sameSite: config.NODE_ENV === "production" ? "none" : "strict",
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Logged out successfully",
+      });
+    } catch (error) {
+      logger.error({
+        message: "Error in Logout",
+        error,
+      });
+
+      res.status(200).json({
+        success: true,
+        message: "Error in Logging out",
+      });
+    }
+  },
 };
 
 export { authController };
