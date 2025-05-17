@@ -1,8 +1,6 @@
 import { UAParser } from "ua-parser-js";
 
-const fetchGeoLocationFromIP = async (ipAddress) => {
-  console.log("Client IP:", ipAddress);
-
+const fetchGeoLocationFromIP = async () => {
   try {
     const response = await fetch("http://ip-api.com/json/?fields=57553");
     const data = await response.json();
@@ -39,15 +37,13 @@ const fetchGeoLocationFromIP = async (ipAddress) => {
 
 const generateLoginAlertPayload = async (req) => {
   const userAgentString = req.headers["user-agent"];
-  const ipAddress =
-    req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
   const parser = new UAParser(userAgentString);
   const browserName = parser.getBrowser().name || "Unknown Browser";
   const osName = parser.getOS().name || "Unknown OS";
   const deviceInfo = `${browserName} on ${osName}`;
 
-  const locationInfo = await fetchGeoLocationFromIP(ipAddress);
+  const locationInfo = await fetchGeoLocationFromIP();
   const locationString = `${locationInfo.city}, ${locationInfo.country}`;
 
   const loginTime = new Date().toLocaleString("en-US", {

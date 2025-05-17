@@ -409,12 +409,6 @@ const generateLoginAlertEmail = ({ device, location, ip, time, year }) => `
           <span class="detail-value">${time}</span>
         </div>
       </div>
-      <p class="security-notice">
-        If this wasn't you:<br>
-        1. Change your password immediately<br>
-        2. Contact our support team<br>
-        3. Review security settings
-      </p>
     </div>
     <footer>
       &copy; ${year} Talkasauras. All rights reserved.
