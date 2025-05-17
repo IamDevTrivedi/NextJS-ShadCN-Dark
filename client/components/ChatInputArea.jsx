@@ -17,7 +17,7 @@ export default function ChatInputArea() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-card border border-border rounded-xl shadow-md w-full max-w-4xl flex items-center gap-2 p-2"
+      className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-card border border-border rounded-xl shadow-md w-full max-w-5xl flex items-center gap-2 p-2"
     >
       <Input
         type="text"

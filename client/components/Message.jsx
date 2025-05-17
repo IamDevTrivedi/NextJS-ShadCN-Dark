@@ -4,6 +4,9 @@ export function Message({ text, sender, date }) {
   const formattedTime = new Date(date).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
   });
 
   return (
