@@ -8,7 +8,7 @@ import config from "../config/config.js";
 
 import { isValidEmail, isValidPassword } from "../utils/validator.utils.js";
 import { generateLoginAlertPayload } from "../utils/ip.utils.js";
-import { generateTokenAndSetCookie } from "../utils/authToken.utilis.js";
+import { generateTokenAndSetCookie } from "../utils/authToken.utils.js";
 
 import {
   generateWelcomeEmail,
@@ -185,7 +185,7 @@ const authController = {
         });
       }
 
-      const token = generateTokenAndSetCookie(res, user._id);
+      const token = await generateTokenAndSetCookie(res, user._id);
 
       const { ip, device, location, time, year } =
         await generateLoginAlertPayload(req);
