@@ -302,4 +302,131 @@ const generateResetOtpEmail = ({ otp, validity, year }) => `
 </html>
 `;
 
-export { generateWelcomeEmail, generateOtpEmail, generateResetOtpEmail };
+const generateLoginAlertEmail = ({ device, location, ip, time, year }) => `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>New Login Detected</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    color: #000000;
+    line-height: 1.4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  .container {
+    max-width: 500px;
+    width: 100%;
+    border: 1.5px solid #000000;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .alert {
+    background: #000000;
+    color: #ffffff;
+    padding: 0.8rem;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .content {
+    padding: 2rem 1.5rem;
+    text-align: center;
+  }
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+  .login-details {
+    border: 1.5px solid #000000;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    text-align: left;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .detail-label {
+    font-weight: 500;
+    color: #666;
+  }
+  .detail-value {
+    font-weight: 600;
+  }
+  .security-notice {
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-top: 1.5px solid #000000;
+  }
+  footer {
+    background: #000000;
+    color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="alert">New Login Detected</div>
+    <div class="content">
+      <h2>Recent Account Activity</h2>
+      <div class="login-details">
+        <div class="detail-row">
+          <span class="detail-label">Device:</span>
+          <span class="detail-value">${device}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Location:</span>
+          <span class="detail-value">${location}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">IP Address:</span>
+          <span class="detail-value">${ip}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">Time:</span>
+          <span class="detail-value">${time}</span>
+        </div>
+      </div>
+      <p class="security-notice">
+        If this wasn't you:<br>
+        1. Change your password immediately<br>
+        2. Contact our support team<br>
+        3. Review security settings
+      </p>
+    </div>
+    <footer>
+      &copy; ${year} Talkasauras. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
+`;
+
+export {
+  generateLoginAlertEmail,
+  generateWelcomeEmail,
+  generateOtpEmail,
+  generateResetOtpEmail,
+};
