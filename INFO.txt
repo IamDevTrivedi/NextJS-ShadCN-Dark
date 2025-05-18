@@ -1,0 +1,8 @@
+Note:
+The 'server' folder within the Git repository serves as an ideal starting point for any backend project requiring authentication. It includes essential fields such as:
+- firstName
+- lastName
+- email
+- password
+
+This 'server' folder constitutes a complete, standalone backend application with authentication capabilities and can be seamlessly integrated as the backend for any frontend project.
