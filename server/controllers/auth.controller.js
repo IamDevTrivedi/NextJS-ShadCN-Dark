@@ -1,6 +1,5 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import { check } from "email-sanitizer";
 
 import logger from "../utils/logger.utils.js";
@@ -437,6 +436,192 @@ const authController = {
             return res.status(500).json({
                 success: false,
                 message: "Error verifying account",
+            });
+        }
+    },
+
+    sendResetPasswordOTP: async (req, res) => {
+        logger.post({
+            message: "api > v1 > auth > sendResetPasswordOTP",
+        });
+
+        const { email } = req.body;
+
+        if (!email) {
+            logger.warn({
+                message: "Email field is required",
+            });
+
+            return res.status(400).json({
+                success: false,
+                message: "Email field is required",
+            });
+        }
+
+        if (!isValidEmail(email)) {
+            logger.warn("Validation failed: Invalid email format", { email });
+            return res.status(400).json({
+                success: false,
+                message: "Invalid email format",
+            });
+        }
+
+        try {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                logger.warn({
+                    message: "No user found with the provided email",
+                });
+
+                return res.status(404).json({
+                    success: false,
+                    message: "No user found with the provided email",
+                });
+            }
+
+            const OTP = String(Math.floor(100000 + Math.random() * 900000));
+            user.resetOTP = OTP;
+            user.resetOTPExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+
+            await user.save();
+
+            const payload = {
+                from: config.SENDER_EMAIL,
+                to: email,
+                subject: "Reset Password Verification OTP",
+                html: generateResetOtpEmail({
+                    OTP,
+                    validity: 5,
+                    year: new Date().getFullYear(),
+                }),
+            };
+
+            try {
+                await transporter.sendMail(payload);
+            } catch (error) {
+                logger.error({
+                    message: "Failed to send the Reset Password OTP email",
+                    error,
+                });
+
+                return res.status(500).json({
+                    success: false,
+                    message: "Failed to send OTP email. Please try again later.",
+                });
+            }
+
+            return res.status(200).json({
+                success: true,
+                message: "OTP has been sent to your email. It will expire in 5 minutes.",
+            });
+        } catch (error) {
+            logger.error({
+                message: "Unexpected error during OTP generation",
+                error,
+            });
+
+            return res.status(500).json({
+                success: false,
+                message: "An error occurred while processing your request. Please try again.",
+            });
+        }
+    },
+
+    checkResetPasswordOTP: async (req, res) => {
+        logger.post({
+            message: "api > v1 > auth > checkResetPasswordOTP",
+        });
+
+        const { email, OTP, password } = req.body;
+
+        if (!email || !OTP || !password) {
+            logger.warn({
+                message: "Missing required fields",
+            });
+            return res.status(400).json({
+                success: false,
+                message: "Missing required fields",
+            });
+        }
+
+        if (!isValidEmail(email)) {
+            logger.warn({
+                message: "Invalid Email Format",
+            });
+
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Email Format",
+            });
+        }
+
+        if (!isValidPassword(password)) {
+            logger.error({ message: "Invalid password" });
+
+            return res.status(400).json({
+                success: false,
+                message:
+                    "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+            });
+        }
+
+        try {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                logger.warn({
+                    message: "No user found with the provided email",
+                });
+
+                return res.status(404).json({
+                    success: false,
+                    message: "No user found with the provided email",
+                });
+            }
+
+            if (user.resetOTP !== OTP) {
+                logger.warn({
+                    message: "Invalid OTP entered",
+                });
+
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid OTP entered",
+                });
+            }
+
+            if (user.resetOTPExpiresAt > Date.now()) {
+                logger.warn({
+                    message: "Reset Password OTP is expired",
+                });
+
+                return res.status(400).json({
+                    success: false,
+                    message: "Reset Password OTP is expired",
+                });
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            user.hashedPassword = hashedPassword;
+            user.resetOTP = "";
+            user.resetOTPExpiresAt = null;
+
+            await user.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Password Reset Successfully",
+            });
+        } catch (error) {
+            logger.error({
+                message: "Error in checkResetPasswordOTP",
+                error,
+            });
+            return res.status(500).json({
+                success: false,
+                message: "Error in Verification of Reset OTP",
             });
         }
     },
