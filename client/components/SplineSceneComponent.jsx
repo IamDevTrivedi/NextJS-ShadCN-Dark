@@ -28,7 +28,7 @@ export function SplineSceneComponent() {
 
                 <div className="pt-2 sm:pt-4 mt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
                     <Button className="w-full sm:w-auto" size="lg">
-                        <Link href="/accounts/sign-up" className="w-full">
+                        <Link href="/accounts/register" className="w-full">
                             Get Started
                         </Link>
                     </Button>

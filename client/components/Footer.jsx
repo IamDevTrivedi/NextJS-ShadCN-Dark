@@ -133,13 +133,13 @@ const Footer = () => {
                     <div className="md:col-span-3">
                         <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
                         <div className="flex flex-wrap gap-3">
-                            {socialLinks.map((social, idx) => (
+                            {/* {socialLinks.map((social, idx) => (
                                 <Button variant={"ghost"} className={"border border-muted"}>
-                                    <a key={idx} href={social.href} aria-label={social.label}>
+                                    <a key={Math.floor(Math.random() * 10000)} href={social.href} aria-label={social.label}>
                                         {social.icon}
                                     </a>
                                 </Button>
-                            ))}
+                            ))} */}
                         </div>
                     </div>
                 </div>
