@@ -4,7 +4,7 @@ import config from "../config/config.js";
 
 const generateTokenAndSetCookie = async (res, userId) => {
   try {
-    const token = jwt.sign({ id: userId }, config.JWT_SECRET, {
+    const token = jwt.sign({ userId: userId }, config.JWT_SECRET, {
       expiresIn: "7d",
     });
 

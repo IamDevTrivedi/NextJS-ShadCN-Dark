@@ -79,8 +79,10 @@ const authController = {
 
       await newUser.save();
 
-      const token = generateTokenAndSetCookie(res, newUser._id);
-
+      console.log(newUser?._id); 
+      const token = await generateTokenAndSetCookie(res, newUser._id);
+      console.log(token); 
+      
       const payload = {
         from: config.SENDER_EMAIL,
         to: email,
@@ -264,6 +266,21 @@ const authController = {
         message: "Error in Logging out",
       });
     }
+  },
+
+  isUserAuthenticated: async (req, res) => {
+    logger.post({
+      message: "api > v1 > auth > isUserAuthenticated",
+      req,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "User is Authenticated",
+      userData: {
+        body: req.body,
+      },
+    });
   },
 };
 
