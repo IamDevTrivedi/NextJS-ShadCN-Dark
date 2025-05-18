@@ -141,12 +141,12 @@ export default function LoginForm() {
                             </div>
 
                             <div className="flex items-center justify-between">
-                                <a
-                                    href="accounts/forgot-password"
+                                <Link
+                                    href="/accounts/forgot-password"
                                     className="text-sm text-muted-foreground hover:text-primary hover:underline underline-offset-2 transition-all duration-200"
                                 >
                                     Forgot password?
-                                </a>
+                                </Link>
                             </div>
 
                             <div className="pt-4">
