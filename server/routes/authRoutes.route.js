@@ -7,10 +7,8 @@ import authMiddleWare from "../middlewares/auth.middleware.js";
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.post("/logout", authController.logout);
-router.post(
-  "/isUserAuthenticated",
-  authMiddleWare,
-  authController.isUserAuthenticated
-);
+router.post("/isUserAuthenticated",authMiddleWare,authController.isUserAuthenticated);
+router.post("/sendVerificationOTP" , authMiddleWare, authController.sendVerificationOTP);
+router.post("/checkVerificationOTP" , authMiddleWare, authController.checkVerificationOTP);
 
 export default router;

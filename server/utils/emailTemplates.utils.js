@@ -108,7 +108,7 @@ const generateWelcomeEmail = ({ name, year }) => `
 </html>
 `;
 
-const generateOtpEmail = ({ otp, validity, year }) => `
+const generateOtpEmail = ({ OTP, validity, year }) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -189,7 +189,7 @@ const generateOtpEmail = ({ otp, validity, year }) => `
       <h1>Talkasauras</h1>
     </header>
     <div class="content">
-      <div class="otp-code">${otp}</div>
+      <div class="otp-code">${OTP}</div>
       <div class="validity">Valid for ${validity} minutes</div>
       <p class="notice">Never share this code. Talkasauras will never ask for it.</p>
     </div>
@@ -201,7 +201,7 @@ const generateOtpEmail = ({ otp, validity, year }) => `
 </html>
 `;
 
-const generateResetOtpEmail = ({ otp, validity, year }) => `
+const generateResetOtpEmail = ({ OTP, validity, year }) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -285,7 +285,7 @@ const generateResetOtpEmail = ({ otp, validity, year }) => `
   <div class="container">
     <div class="alert">Password Reset Request</div>
     <div class="content">
-      <div class="otp-code">${otp}</div>
+      <div class="otp-code">${OTP}</div>
       <div class="validity">Valid for ${validity} minutes</div>
       <div class="warning">
         <p>⚠️ If you didn't request this:</p>

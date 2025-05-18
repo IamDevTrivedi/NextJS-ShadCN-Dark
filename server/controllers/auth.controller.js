@@ -79,10 +79,10 @@ const authController = {
 
       await newUser.save();
 
-      console.log(newUser?._id); 
+      console.log(newUser?._id);
       const token = await generateTokenAndSetCookie(res, newUser._id);
-      console.log(token); 
-      
+      console.log(token);
+
       const payload = {
         from: config.SENDER_EMAIL,
         to: email,
@@ -281,6 +281,168 @@ const authController = {
         body: req.body,
       },
     });
+  },
+
+  sendVerificationOTP: async (req, res) => {
+    logger.post({
+      message: "api > v1 > auth > sendVerificationOTP",
+      req,
+    });
+
+    try {
+      const userId = req.body.userId;
+
+      const user = await User.findById(userId);
+
+      if (!user) {
+        logger.warn({
+          message: "User do not exist",
+        });
+
+        return res.status(400).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      if (user.isAccountVerified) {
+        logger.warn({
+          message: "Account Already Verified",
+        });
+
+        return res.status(400).json({
+          success: false,
+          message: "Account Already Verified",
+        });
+      }
+
+      const OTP = String(Math.floor(100000 + Math.random() * 900000));
+
+      user.verificationOTP = OTP;
+      user.verificationOTPExpiresAt = Date.now() + 5 * 60 * 1000;
+
+      await user.save();
+
+      const payload = {
+        from: config.SENDER_EMAIL,
+        to: user.email,
+        subject: "Account Verification OTP",
+        html: generateOtpEmail({
+          OTP,
+          validity: 5,
+          year: new Date().getFullYear(),
+        }),
+      };
+
+      try {
+        await transporter.sendMail(payload);
+
+        return res.status(200).json({
+          success: true,
+          message: "Verification OTP sent successfully",
+        });
+      } catch (error) {
+        logger.error({
+          message: "Error in sending Verification OTP",
+          error,
+        });
+
+        return res.status(500).json({
+          success: false,
+          message: "Error sending verification OTP",
+        });
+      }
+    } catch (error) {
+      logger.error({
+        message: "Error in sendVerificationOTP",
+        error,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: "Error sending OTP",
+      });
+    }
+  },
+
+  checkVerificationOTP: async (req, res) => {
+    const { userId, OTP } = req.body;
+
+    if (!OTP) {
+      logger.warn({
+        message: "OTP field in required",
+      });
+
+      res.status(400).json({
+        success: false,
+        message: "OTP field in required",
+      });
+    }
+
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        logger.warn({
+          message: "User not Found",
+        });
+
+        res.status(400).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      if (user.isAccountVerified) {
+        logger.warn({
+          message: "Account already verified",
+        });
+
+        return res.status(400).json({
+          success: false,
+          message: "Account already verified",
+        });
+      }
+
+      if (user.verificationOTP !== OTP) {
+        logger.warn({
+          message: "Invalid OTP entered",
+        });
+
+        return res.status(400).json({ success: false, message: "Invalid OTP" });
+      }
+
+      if (user.verificationOTPExpiresAt < Date.now()) {
+        logger.warn({
+          message: "OTP expired",
+        });
+
+        return res.status(400).json({ success: false, message: "OTP expired" });
+      }
+
+      user.isAccountVerified = true;
+
+      user.verificationOTP = "";
+
+      user.verificationOTPExpiresAt = null;
+
+      await user.save();
+
+      return res.status(200).json({
+        success: true,
+        message: "Account verified successfully",
+      });
+    } catch (error) {
+      logger.error({
+        message: "Error in checkVerificationOTP",
+        error,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: "Error verifying account",
+      });
+    }
   },
 };
 
