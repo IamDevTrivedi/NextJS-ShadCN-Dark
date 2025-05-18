@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function Page() {
     const [formData, setFormData] = useState({
@@ -75,12 +76,6 @@ export default function Page() {
             });
             return;
         }
-
-        toast("Form submitted successfully!", {
-            dismissible: true,
-            type: "success",
-            closeButton: true,
-        });
     };
 
     const onSubmit = (e) => {
@@ -267,15 +262,24 @@ export default function Page() {
                                         className="hover:text-primary hover:underline underline-offset-2 transition-all duration-200"
                                         target="_blank"
                                     >
-                                        Privacy Policy
+                                        Privacy Policy.
                                     </a>
-                                    .
                                 </Label>
                                 <span className="text-destructive/60">*</span>
                             </div>
 
                             <div className="pt-4">
                                 <SubmitButton />
+                            </div>
+
+                            <div className="text-sm text-muted-foreground">
+                                Already have an account?{" "}
+                                <Link
+                                    href="/accounts/login"
+                                    className="hover:text-primary hover:underline underline-offset-2 transition-all duration-200"
+                                >
+                                    Login
+                                </Link>
                             </div>
                         </div>
                     </form>
