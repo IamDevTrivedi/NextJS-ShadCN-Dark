@@ -1,3 +1,8 @@
+"use client";
+
+import StepWizard from "react-step-wizard";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -10,12 +15,113 @@ import {
 import { Input } from "@/components/ui/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import React from "react";
+
+let custom = {
+    enterRight: "transition-none duration-0",
+    enterLeft: "transition-none duration-0",
+    exitRight: "transition-none duration-0",
+    exitLeft: "transition-none duration-0",
+    intro: "transition-none duration-0",
+};
+
+const Step1 = () => {
+    return (
+        <CardContent className="py-6 px-4 sm:px-6">
+            <div className="space-y-4">
+                <Label htmlFor="email" className="block text-sm font-medium">
+                    Email Address <span className="text-destructive/60">*</span>
+                </Label>
+
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        className="sm:col-span-3"
+                    />
+                    <Button className="w-full sm:w-auto">Send OTP</Button>
+                </div>
+            </div>
+        </CardContent>
+    );
+};
+
+const Step2 = () => {
+    return (
+        <CardContent className="py-6 px-4 sm:px-6">
+            <div className="space-y-6">
+                <div>
+                    <Label htmlFor="otp" className="block text-sm font-medium mb-2">
+                        Enter OTP <span className="text-destructive/60 ml-1">*</span>
+                    </Label>
+
+                    <div className="flex justify-center max-w-md mx-auto">
+                        <InputOTP maxLength={6} className="w-full ">
+                            <InputOTPGroup className="gap-2 sm:gap-3">
+                                <InputOTPSlot index={0} />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                            </InputOTPGroup>
+                            <InputOTPGroup className="gap-2 sm:gap-3">
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                            </InputOTPGroup>
+                        </InputOTP>
+                    </div>
+                </div>
+
+                <div className="pt-2">
+                    <Button className="w-full sm:w-auto sm:px-8 mx-auto flex justify-center">
+                        Verify OTP
+                    </Button>
+                </div>
+            </div>
+        </CardContent>
+    );
+};
+
+const Step3 = () => {
+    return (
+        <CardContent className="py-6 px-4 sm:px-6">
+            <div className="space-y-6 max-w-md mx-auto">
+                <div>
+                    <Label htmlFor="password" className="block text-sm font-medium mb-2">
+                        Password <span className="text-destructive/60 ml-1">*</span>
+                    </Label>
+                    <Input id="password" type="password" placeholder="Create a secure password" />
+                </div>
+
+                <p className="text-xs text-muted-foreground">
+                    Password must be at least 8 characters long and contain at least one uppercase
+                    letter, one lowercase letter, one number, and one special character
+                </p>
+
+                <div>
+                    <Label htmlFor="confirm-password" className="block text-sm font-medium mb-2">
+                        Confirm Password <span className="text-destructive/60 ml-1">*</span>
+                    </Label>
+                    <Input
+                        id="confirm-password"
+                        type="password"
+                        placeholder="Repeat your password"
+                    />
+                </div>
+
+                <div className="pt-2">
+                    <Button className="w-full sm:w-auto sm:min-w-32 flex justify-center mx-auto">
+                        Reset Password
+                    </Button>
+                </div>
+            </div>
+        </CardContent>
+    );
+};
 
 export default function AccountRecoveryPage() {
     return (
-        <div className="h-screen my-15 w-full flex items-center justify-center">
+        <div className="h-screen w-screen px-2 md:px-4 flex items-center justify-center">
             <Card className="w-full max-w-lg mx-auto shadow-lg">
                 <CardHeader className="text-center">
                     <CardTitle className="text-md md:text-xl font-bold">
@@ -26,95 +132,20 @@ export default function AccountRecoveryPage() {
                     </CardDescription>
                 </CardHeader>
 
-                {/* Email Section */}
-                <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="email" className="flex items-center">
-                            Email Address <span className="text-destructive ml-1">*</span>
-                        </Label>
-                        <div className="gap-2 flex md:flex-row">
-                            <Input
-                                id="email"
-                                type="email"
-                                placeholder="you@example.com"
-                                className="flex-1"
-                            />
-                            <Button>Send OTP</Button>
-                        </div>
-                    </div>
-                </CardContent>
-
-                <Separator className="max-w-md mx-auto" />
-
-                {/* OTP Section */}
-                <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="otp" className="flex items-center">
-                            Enter OTP <span className="text-destructive ml-1">*</span>
-                        </Label>
-                        <div className="flex justify-center mb-2">
-                            <InputOTP maxLength={6}>
-                                <InputOTPGroup>
-                                    <InputOTPSlot index={0} />
-                                    <InputOTPSlot index={1} />
-                                    <InputOTPSlot index={2} />
-                                </InputOTPGroup>
-                                <InputOTPGroup>
-                                    <InputOTPSlot index={3} />
-                                    <InputOTPSlot index={4} />
-                                    <InputOTPSlot index={5} />
-                                </InputOTPGroup>
-                            </InputOTP>
-                        </div>
-                        <div className="flex justify-center mt-2">
-                            <Button>Verify OTP</Button>
-                        </div>
-                    </div>
-                </CardContent>
-
-                <Separator className="max-w-md mx-auto" />
-
-                {/* Password Section */}
-                <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="password" className="flex items-center">
-                            Password <span className="text-destructive ml-1">*</span>
-                        </Label>
-                        <Input
-                            id="password"
-                            type="password"
-                            placeholder="Create a secure password"
-                        />
-                    </div>
-
-                    <p className="text-xs text-center text-muted-foreground">
-                        Password must be at least 8 characters long and contain at least one
-                        uppercase letter, one lowercase letter, one number, and one special
-                        character
-                    </p>
-
-                    <div className="space-y-2">
-                        <Label htmlFor="confirm-password" className="flex items-center">
-                            Confirm Password <span className="text-destructive ml-1">*</span>
-                        </Label>
-                        <Input
-                            id="confirm-password"
-                            type="password"
-                            placeholder="Repeat your password"
-                        />
-                    </div>
-
-                    <div className="flex justify-center mt-4">
-                        <Button>Reset Password</Button>
-                    </div>
-                </CardContent>
+                <div className="flex items-center justify-center px-4">
+                    <StepWizard initialStep={3} transitions={custom}>
+                        <Step1 />
+                        <Step2 />
+                        <Step3 />
+                    </StepWizard>
+                </div>
 
                 <CardFooter className="flex justify-center pt-2">
                     <p className="text-center text-sm text-muted-foreground">
                         Remember your password?{" "}
                         <a
                             href="/accounts/login"
-                            className="text-primary hover:underline font-medium"
+                            className="text-primary hover:underline underline-offset-4 transition-all duration-300 font-medium"
                         >
                             Back to Login
                         </a>
