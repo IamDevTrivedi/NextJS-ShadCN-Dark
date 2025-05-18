@@ -1,9 +1,9 @@
 // .prettierrc.js  (ESM)
+// .prettierrc.cjs
 export default {
-  printWidth: 100,
-  tabWidth: 2,
+  tabWidth: 4,
   useTabs: false,
-  semi: true,
+  printWidth: 100,
   singleQuote: true,
   trailingComma: "es5",
   bracketSpacing: true,

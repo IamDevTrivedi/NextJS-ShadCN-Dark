@@ -418,9 +418,4 @@ const generateLoginAlertEmail = ({ device, location, ip, time, year }) => `
 </html>
 `;
 
-export {
-  generateLoginAlertEmail,
-  generateWelcomeEmail,
-  generateOtpEmail,
-  generateResetOtpEmail,
-};
+export { generateLoginAlertEmail, generateWelcomeEmail, generateOtpEmail, generateResetOtpEmail };

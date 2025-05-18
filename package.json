@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "go": "concurrently \"cd client && pnpm run dev\" \"cd server && pnpm run start\"",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format": "prettier --write \"{client,server}/**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { ChatSidebar } from "@/components/ChatSidebar"
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { ChatSidebar } from '@/components/ChatSidebar';
 
 export default function Layout({ children }) {
     return (
@@ -10,5 +10,5 @@ export default function Layout({ children }) {
                 {children}
             </main>
         </SidebarProvider>
-    )
+    );
 }
