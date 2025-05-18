@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "go": "concurrently \"cd client && pnpm run dev\" \"cd server && pnpm run start\""
+    "go": "concurrently \"cd client && pnpm run dev\" \"cd server && pnpm run start\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,8 @@
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
     "concurrently": "^9.1.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
   }
 }
