@@ -443,6 +443,7 @@ const authController = {
     sendResetPasswordOTP: async (req, res) => {
         logger.post({
             message: "api > v1 > auth > sendResetPasswordOTP",
+            req,
         });
 
         const { email } = req.body;
@@ -524,6 +525,83 @@ const authController = {
             return res.status(500).json({
                 success: false,
                 message: "An error occurred while processing your request. Please try again.",
+            });
+        }
+    },
+
+    isResetPasswordOTPMatch: async (req, res) => {
+        logger.post({
+            message: "api > v1 > auth > isResetPasswordOTPMatch",
+            req,
+        });
+
+        const { email, OTP } = req.body;
+
+        if (!email || !OTP) {
+            logger.warn({
+                message: "All Fields are Mandatory",
+            });
+
+            return res.status(400).json({
+                success: false,
+                message: "All Fields are Mandatory",
+            });
+        }
+
+        if (!isValidEmail(email)) {
+            logger.warn({
+                message: "Invalid Email Format",
+            });
+
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Email Format",
+            });
+        }
+
+        try {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                logger.warn({
+                    message: "No User found",
+                });
+
+                return res.status(400).json({
+                    success: false,
+                    message: "No User found",
+                });
+            }
+
+            if (user.resetOTP !== OTP) {
+                logger.warn({
+                    message: "Invalid OTP",
+                });
+
+                return res.status(400).json({
+                    success: false,
+                    message: "Invalid OTP",
+                });
+            }
+
+            logger.info({
+                message: "OTP matched successfully",
+                email,
+            });
+
+            return res.status(200).json({
+                success: true,
+                message: "OTP matched successfully",
+            });
+        } catch (error) {
+            logger.error({
+                message: "Error in isResetPasswordOTPMatch",
+                error,
+            });
+
+            return res.status(500).json({
+                success: false,
+                message: "Internal Server Error",
             });
         }
     },
