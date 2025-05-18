@@ -57,7 +57,7 @@ function InputOTPSlot({ index, className, ...props }) {
 function InputOTPSeparator({ ...props }) {
     return (
         <div data-slot="input-otp-separator" role="separator" {...props}>
-            <MinusIcon />
+            <MinusIcon size={12} />
         </div>
     );
 }
