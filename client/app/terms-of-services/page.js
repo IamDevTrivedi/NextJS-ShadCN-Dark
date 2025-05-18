@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function TermsOfServicePage() {
     const router = useRouter();
@@ -197,8 +197,8 @@ export default function TermsOfServicePage() {
                     <CardTitle>for Any legal issues, Kindly contact us.</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Button size={'lg'}>
-                        <Link href={'/contact'}>Contant Us</Link>
+                    <Button size={"lg"}>
+                        <Link href={"/contact"}>Contant Us</Link>
                     </Button>
                 </CardContent>
             </Card>

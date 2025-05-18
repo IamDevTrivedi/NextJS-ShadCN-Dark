@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
     {
@@ -36,7 +36,7 @@ const UserSchema = new mongoose.Schema(
 
         verificationOTP: {
             type: String,
-            default: '',
+            default: "",
         },
 
         verificationOTPExpiresAt: {
@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema(
 
         resetOTP: {
             type: String,
-            default: '',
+            default: "",
         },
 
         resetOTPExpiresAt: {
@@ -57,5 +57,5 @@ const UserSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model("User", UserSchema);
 export default User;

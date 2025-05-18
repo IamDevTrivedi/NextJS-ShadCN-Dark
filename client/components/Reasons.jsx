@@ -1,32 +1,32 @@
-import { PointerHighlight } from '@/components/ui/pointer-highlight';
+import { PointerHighlight } from "@/components/ui/pointer-highlight";
 
 // Define colors as objects with specific class names instead of dynamic strings
 const reasonStyles = {
     green: {
-        rectangle: 'bg-green-100 dark:bg-green-900/30 border-green-300 dark:border-green-700',
-        pointer: 'text-green-500 h-3 w-3',
+        rectangle: "bg-green-100 dark:bg-green-900/30 border-green-300 dark:border-green-700",
+        pointer: "text-green-500 h-3 w-3",
     },
     blue: {
-        rectangle: 'bg-blue-100 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700',
-        pointer: 'text-blue-500 h-3 w-3',
+        rectangle: "bg-blue-100 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700",
+        pointer: "text-blue-500 h-3 w-3",
     },
 };
 
 const reasons = [
     {
-        highlight: 'no matter the format',
+        highlight: "no matter the format",
         text: "You don't need to convert or clean anything. Just drop in your file — image, audio, document, or video — and you're ready to go.",
-        color: 'green',
+        color: "green",
     },
     {
-        highlight: 'ask naturally',
+        highlight: "ask naturally",
         text: "You don't need special commands. Just ask your question the way you think it, and let AI handle the complexity.",
-        color: 'blue',
+        color: "blue",
     },
     {
-        highlight: 'save time & energy',
+        highlight: "save time & energy",
         text: "Whether you're studying, analyzing, or researching, our AI handles the heavy lifting so you can focus on what matters.",
-        color: 'green',
+        color: "green",
     },
 ];
 

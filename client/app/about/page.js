@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Bot, MessageSquare, Shield, Sparkles, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Bot, MessageSquare, Shield, Sparkles, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AboutPage() {
     const router = useRouter();
@@ -13,27 +13,27 @@ export default function AboutPage() {
     const features = [
         {
             icon: <Bot className="h-6 w-6 text-primary" />,
-            title: 'Intelligent Conversations',
+            title: "Intelligent Conversations",
             description:
-                'Our AI understands context and nuance, enabling natural, flowing conversations that feel human-like and intuitive.',
+                "Our AI understands context and nuance, enabling natural, flowing conversations that feel human-like and intuitive.",
         },
         {
             icon: <MessageSquare className="h-6 w-6 text-primary" />,
-            title: 'Personalized Experience',
+            title: "Personalized Experience",
             description:
-                'Talkasaurus learns from your interactions to provide increasingly relevant and helpful responses tailored to your needs.',
+                "Talkasaurus learns from your interactions to provide increasingly relevant and helpful responses tailored to your needs.",
         },
         {
             icon: <Shield className="h-6 w-6 text-primary" />,
-            title: 'Privacy-Focused',
+            title: "Privacy-Focused",
             description:
-                'Your data is yours alone. We use your chat history only to improve your individual experience, never for analytics or third parties.',
+                "Your data is yours alone. We use your chat history only to improve your individual experience, never for analytics or third parties.",
         },
         {
             icon: <Sparkles className="h-6 w-6 text-primary" />,
-            title: 'Continuous Improvement',
+            title: "Continuous Improvement",
             description:
-                'Our AI is constantly evolving, with regular updates that enhance capabilities, fix issues, and introduce new features.',
+                "Our AI is constantly evolving, with regular updates that enhance capabilities, fix issues, and introduce new features.",
         },
     ];
 

@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const ChatMessageSchema = new mongoose.Schema(
     {
@@ -10,12 +10,12 @@ const ChatMessageSchema = new mongoose.Schema(
         },
         sender: {
             type: String,
-            enum: ['user', 'bot'],
+            enum: ["user", "bot"],
             required: true,
         },
         type: {
             type: String,
-            enum: ['text', 'image', 'file'],
+            enum: ["text", "image", "file"],
             required: true,
         },
         content: {
@@ -25,13 +25,13 @@ const ChatMessageSchema = new mongoose.Schema(
         fileName: {
             type: String,
             required: function () {
-                return this.type === 'file';
+                return this.type === "file";
             },
         },
         mimeType: {
             type: String,
             required: function () {
-                return this.type === 'file' || this.type === 'image';
+                return this.type === "file" || this.type === "image";
             },
         },
     },
@@ -40,4 +40,4 @@ const ChatMessageSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('ChatMessage', ChatMessageSchema);
+module.exports = mongoose.model("ChatMessage", ChatMessageSchema);

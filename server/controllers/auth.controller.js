@@ -1,58 +1,58 @@
-import User from '../models/user.model.js';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { check } from 'email-sanitizer';
+import User from "../models/user.model.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { check } from "email-sanitizer";
 
-import logger from '../utils/logger.utils.js';
-import config from '../config/config.js';
+import logger from "../utils/logger.utils.js";
+import config from "../config/config.js";
 
-import { isValidEmail, isValidPassword } from '../utils/validator.utils.js';
-import { generateLoginAlertPayload } from '../utils/ip.utils.js';
-import { generateTokenAndSetCookie } from '../utils/authToken.utils.js';
+import { isValidEmail, isValidPassword } from "../utils/validator.utils.js";
+import { generateLoginAlertPayload } from "../utils/ip.utils.js";
+import { generateTokenAndSetCookie } from "../utils/authToken.utils.js";
 
 import {
     generateWelcomeEmail,
     generateOtpEmail,
     generateResetOtpEmail,
     generateLoginAlertEmail,
-} from '../utils/emailTemplates.utils.js';
+} from "../utils/emailTemplates.utils.js";
 
-import transporter from '../config/nodemailer.config.js';
+import transporter from "../config/nodemailer.config.js";
 
 const authController = {
     register: async (req, res) => {
         logger.post({
-            message: 'api > v1 > auth > register',
+            message: "api > v1 > auth > register",
             req,
         });
 
         const { firstName, lastName, email, password } = req.body;
 
         if (!firstName || !lastName || !email || !password) {
-            logger.error({ message: 'All fields are required' });
+            logger.error({ message: "All fields are required" });
 
             return res.status(400).json({
                 success: false,
-                message: 'All fields are required',
+                message: "All fields are required",
             });
         }
 
         if (!isValidEmail(email)) {
-            logger.error({ message: 'Invalid email' });
+            logger.error({ message: "Invalid email" });
 
             return res.status(400).json({
                 success: false,
-                message: 'Invalid email',
+                message: "Invalid email",
             });
         }
 
         if (!isValidPassword(password)) {
-            logger.error({ message: 'Invalid password' });
+            logger.error({ message: "Invalid password" });
 
             return res.status(400).json({
                 success: false,
                 message:
-                    'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+                    "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
             });
         }
 
@@ -60,11 +60,11 @@ const authController = {
             const existingUser = await User.findOne({ email });
 
             if (existingUser) {
-                logger.error({ message: 'Email already in use' });
+                logger.error({ message: "Email already in use" });
 
                 return res.status(400).json({
                     success: false,
-                    message: 'Email already in use',
+                    message: "Email already in use",
                 });
             }
 
@@ -86,7 +86,7 @@ const authController = {
             const payload = {
                 from: config.SENDER_EMAIL,
                 to: email,
-                subject: 'Welcome to Talkasauras',
+                subject: "Welcome to Talkasauras",
                 html: generateWelcomeEmail({
                     name: `${firstName} ${lastName}`,
                     year: new Date().getFullYear(),
@@ -97,14 +97,14 @@ const authController = {
                 await transporter.sendMail(payload);
             } catch (error) {
                 logger.error({
-                    message: 'Failed sending welcome email',
+                    message: "Failed sending welcome email",
                     error,
                 });
             }
 
             res.status(201).json({
                 success: true,
-                message: 'User registered successfully',
+                message: "User registered successfully",
                 user: {
                     firstName,
                     lastName,
@@ -114,50 +114,50 @@ const authController = {
             });
         } catch (error) {
             logger.error({
-                message: 'Error in register',
+                message: "Error in register",
                 error,
             });
 
             return res.status(500).json({
                 success: false,
-                message: 'Internal server error',
+                message: "Internal server error",
             });
         }
     },
 
     login: async (req, res) => {
         logger.post({
-            message: 'api > v1 > auth > login',
+            message: "api > v1 > auth > login",
             req,
         });
 
         const { email, password } = req.body;
 
         if (!email || !password) {
-            logger.error({ message: 'All fields are required' });
+            logger.error({ message: "All fields are required" });
 
             return res.status(400).json({
                 success: false,
-                message: 'All fields are required',
+                message: "All fields are required",
             });
         }
 
         if (!isValidEmail(email)) {
-            logger.error({ message: 'Invalid email' });
+            logger.error({ message: "Invalid email" });
 
             return res.status(400).json({
                 success: false,
-                message: 'Invalid email',
+                message: "Invalid email",
             });
         }
 
         if (!isValidPassword(password)) {
-            logger.error({ message: 'Invalid password' });
+            logger.error({ message: "Invalid password" });
 
             return res.status(400).json({
                 success: false,
                 message:
-                    'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character',
+                    "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
             });
         }
 
@@ -165,22 +165,22 @@ const authController = {
             const user = await User.findOne({ email });
 
             if (!user) {
-                logger.error({ message: 'Invalid email or password' });
+                logger.error({ message: "Invalid email or password" });
 
                 return res.status(404).json({
                     success: false,
-                    message: 'Invalid email or password',
+                    message: "Invalid email or password",
                 });
             }
 
             const isPasswordMatch = await bcrypt.compare(password, user.hashedPassword);
 
             if (!isPasswordMatch) {
-                logger.error({ message: 'Invalid email or password' });
+                logger.error({ message: "Invalid email or password" });
 
                 return res.status(404).json({
                     success: false,
-                    message: 'Invalid email or password',
+                    message: "Invalid email or password",
                 });
             }
 
@@ -191,7 +191,7 @@ const authController = {
             const payload = {
                 from: config.SENDER_EMAIL,
                 to: email,
-                subject: 'New Login Alert',
+                subject: "New Login Alert",
                 html: generateLoginAlertEmail({
                     device,
                     location,
@@ -205,14 +205,14 @@ const authController = {
                 await transporter.sendMail(payload);
             } catch (error) {
                 logger.error({
-                    message: 'Failed sending login alert email',
+                    message: "Failed sending login alert email",
                     error,
                 });
             }
 
             return res.status(200).json({
                 success: true,
-                message: 'User logged in successfully',
+                message: "User logged in successfully",
 
                 userData: {
                     firstName: user.firstName,
@@ -223,56 +223,56 @@ const authController = {
             });
         } catch (error) {
             logger.error({
-                message: 'Error in login',
+                message: "Error in login",
                 error,
             });
 
             return res.status(500).json({
                 success: false,
-                message: 'Internal server error',
+                message: "Internal server error",
             });
         }
     },
 
     logout: async (req, res) => {
         logger.post({
-            message: 'api > v1 > auth > logout',
+            message: "api > v1 > auth > logout",
             req,
         });
 
         try {
-            res.clearCookie('token', {
+            res.clearCookie("token", {
                 httpOnly: true,
-                secure: config.NODE_ENV === 'production',
-                sameSite: config.NODE_ENV === 'production' ? 'none' : 'strict',
+                secure: config.NODE_ENV === "production",
+                sameSite: config.NODE_ENV === "production" ? "none" : "strict",
             });
 
             res.status(200).json({
                 success: true,
-                message: 'Logged out successfully',
+                message: "Logged out successfully",
             });
         } catch (error) {
             logger.error({
-                message: 'Error in Logout',
+                message: "Error in Logout",
                 error,
             });
 
             res.status(200).json({
                 success: true,
-                message: 'Error in Logging out',
+                message: "Error in Logging out",
             });
         }
     },
 
     isUserAuthenticated: async (req, res) => {
         logger.post({
-            message: 'api > v1 > auth > isUserAuthenticated',
+            message: "api > v1 > auth > isUserAuthenticated",
             req,
         });
 
         res.status(200).json({
             success: true,
-            message: 'User is Authenticated',
+            message: "User is Authenticated",
             userData: {
                 body: req.body,
             },
@@ -281,7 +281,7 @@ const authController = {
 
     sendVerificationOTP: async (req, res) => {
         logger.post({
-            message: 'api > v1 > auth > sendVerificationOTP',
+            message: "api > v1 > auth > sendVerificationOTP",
             req,
         });
 
@@ -292,23 +292,23 @@ const authController = {
 
             if (!user) {
                 logger.warn({
-                    message: 'User do not exist',
+                    message: "User do not exist",
                 });
 
                 return res.status(400).json({
                     success: false,
-                    message: 'User not found',
+                    message: "User not found",
                 });
             }
 
             if (user.isAccountVerified) {
                 logger.warn({
-                    message: 'Account Already Verified',
+                    message: "Account Already Verified",
                 });
 
                 return res.status(400).json({
                     success: false,
-                    message: 'Account Already Verified',
+                    message: "Account Already Verified",
                 });
             }
 
@@ -322,7 +322,7 @@ const authController = {
             const payload = {
                 from: config.SENDER_EMAIL,
                 to: user.email,
-                subject: 'Account Verification OTP',
+                subject: "Account Verification OTP",
                 html: generateOtpEmail({
                     OTP,
                     validity: 5,
@@ -335,28 +335,28 @@ const authController = {
 
                 return res.status(200).json({
                     success: true,
-                    message: 'Verification OTP sent successfully',
+                    message: "Verification OTP sent successfully",
                 });
             } catch (error) {
                 logger.error({
-                    message: 'Error in sending Verification OTP',
+                    message: "Error in sending Verification OTP",
                     error,
                 });
 
                 return res.status(500).json({
                     success: false,
-                    message: 'Error sending verification OTP',
+                    message: "Error sending verification OTP",
                 });
             }
         } catch (error) {
             logger.error({
-                message: 'Error in sendVerificationOTP',
+                message: "Error in sendVerificationOTP",
                 error,
             });
 
             return res.status(500).json({
                 success: false,
-                message: 'Error sending OTP',
+                message: "Error sending OTP",
             });
         }
     },
@@ -366,12 +366,12 @@ const authController = {
 
         if (!OTP) {
             logger.warn({
-                message: 'OTP field in required',
+                message: "OTP field in required",
             });
 
             res.status(400).json({
                 success: false,
-                message: 'OTP field in required',
+                message: "OTP field in required",
             });
         }
 
@@ -380,45 +380,45 @@ const authController = {
 
             if (!user) {
                 logger.warn({
-                    message: 'User not Found',
+                    message: "User not Found",
                 });
 
                 res.status(400).json({
                     success: false,
-                    message: 'User not found',
+                    message: "User not found",
                 });
             }
 
             if (user.isAccountVerified) {
                 logger.warn({
-                    message: 'Account already verified',
+                    message: "Account already verified",
                 });
 
                 return res.status(400).json({
                     success: false,
-                    message: 'Account already verified',
+                    message: "Account already verified",
                 });
             }
 
             if (user.verificationOTP !== OTP) {
                 logger.warn({
-                    message: 'Invalid OTP entered',
+                    message: "Invalid OTP entered",
                 });
 
-                return res.status(400).json({ success: false, message: 'Invalid OTP' });
+                return res.status(400).json({ success: false, message: "Invalid OTP" });
             }
 
             if (user.verificationOTPExpiresAt < Date.now()) {
                 logger.warn({
-                    message: 'OTP expired',
+                    message: "OTP expired",
                 });
 
-                return res.status(400).json({ success: false, message: 'OTP expired' });
+                return res.status(400).json({ success: false, message: "OTP expired" });
             }
 
             user.isAccountVerified = true;
 
-            user.verificationOTP = '';
+            user.verificationOTP = "";
 
             user.verificationOTPExpiresAt = null;
 
@@ -426,17 +426,17 @@ const authController = {
 
             return res.status(200).json({
                 success: true,
-                message: 'Account verified successfully',
+                message: "Account verified successfully",
             });
         } catch (error) {
             logger.error({
-                message: 'Error in checkVerificationOTP',
+                message: "Error in checkVerificationOTP",
                 error,
             });
 
             return res.status(500).json({
                 success: false,
-                message: 'Error verifying account',
+                message: "Error verifying account",
             });
         }
     },

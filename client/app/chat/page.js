@@ -1,5 +1,5 @@
-import MessageArea from '@/components/MessageArea';
-import ChatInputArea from '@/components/ChatInputArea';
+import MessageArea from "@/components/MessageArea";
+import ChatInputArea from "@/components/ChatInputArea";
 
 export default function Page() {
     return (

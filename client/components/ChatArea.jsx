@@ -1,6 +1,6 @@
-import React from 'react';
-import MessageArea from './MessageArea';
-import ChatInputArea from './ChatInputArea.jsx';
+import React from "react";
+import MessageArea from "./MessageArea";
+import ChatInputArea from "./ChatInputArea.jsx";
 
 export default function ChatArea() {
     return (

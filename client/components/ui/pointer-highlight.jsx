@@ -1,7 +1,7 @@
-'use client';
-import { cn } from '@/lib/utils';
-import { motion } from 'motion/react';
-import { useRef, useEffect, useState } from 'react';
+"use client";
+import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
+import { useRef, useEffect, useState } from "react";
 
 export function PointerHighlight({
     children,
@@ -37,18 +37,18 @@ export function PointerHighlight({
     }, []);
 
     return (
-        <div className={cn('relative w-fit', containerClassName)} ref={containerRef}>
+        <div className={cn("relative w-fit", containerClassName)} ref={containerRef}>
             {children}
             {dimensions.width > 0 && dimensions.height > 0 && (
                 <motion.div
                     className="pointer-events-none absolute inset-0 z-0"
                     initial={{ opacity: 0, scale: 0.95, originX: 0, originY: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                     <motion.div
                         className={cn(
-                            'absolute inset-0 border border-neutral-800 dark:border-neutral-200',
+                            "absolute inset-0 border border-neutral-800 dark:border-neutral-200",
                             rectangleClassName
                         )}
                         initial={{
@@ -61,7 +61,7 @@ export function PointerHighlight({
                         }}
                         transition={{
                             duration: 1,
-                            ease: 'easeInOut',
+                            ease: "easeInOut",
                         }}
                     />
                     <motion.div
@@ -76,12 +76,12 @@ export function PointerHighlight({
                             rotate: -90,
                         }}
                         transition={{
-                            opacity: { duration: 0.1, ease: 'easeInOut' },
+                            opacity: { duration: 0.1, ease: "easeInOut" },
                             duration: 1,
-                            ease: 'easeInOut',
+                            ease: "easeInOut",
                         }}
                     >
-                        <Pointer className={cn('h-5 w-5 text-blue-500', pointerClassName)} />
+                        <Pointer className={cn("h-5 w-5 text-blue-500", pointerClassName)} />
                     </motion.div>
                 </motion.div>
             )}

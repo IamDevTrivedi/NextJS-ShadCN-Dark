@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useId } from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useId } from "react";
+import { useState } from "react";
 
 export function FeaturesSection() {
     const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -23,7 +23,7 @@ export function FeaturesSection() {
                             key={feature.title}
                             id={`feature-number-${idx}`}
                             className={`relative bg-card text-accent-foreground p-6 rounded-3xl overflow-hidden transition duration-300 ${
-                                isBlurred ? 'blur-xs' : 'blur-0'
+                                isBlurred ? "blur-xs" : "blur-0"
                             }`}
                             onMouseEnter={() => setHoveredIndex(idx)}
                             onMouseLeave={() => setHoveredIndex(null)}
@@ -43,44 +43,44 @@ export function FeaturesSection() {
 
 const grid = [
     {
-        title: 'Multimodal Chat Support',
+        title: "Multimodal Chat Support",
         description:
-            'Interact using text, images, audio, documents, and even videos — all in one seamless chat interface.',
+            "Interact using text, images, audio, documents, and even videos — all in one seamless chat interface.",
     },
     {
-        title: 'Image Understanding',
+        title: "Image Understanding",
         description:
-            'Upload images and ask questions about them, get descriptions, or analyze visual content with AI.',
+            "Upload images and ask questions about them, get descriptions, or analyze visual content with AI.",
     },
     {
-        title: 'Audio-to-Text (Speech Recognition)',
+        title: "Audio-to-Text (Speech Recognition)",
         description:
-            'Talk to the chatbot using your voice. Audio is transcribed and processed instantly with high accuracy.',
+            "Talk to the chatbot using your voice. Audio is transcribed and processed instantly with high accuracy.",
     },
     {
-        title: 'Video Intelligence',
+        title: "Video Intelligence",
         description:
-            'Upload videos to extract summaries, transcriptions, and insights from key frames or spoken content.',
+            "Upload videos to extract summaries, transcriptions, and insights from key frames or spoken content.",
     },
     {
-        title: 'Document Q&A',
+        title: "Document Q&A",
         description:
-            'Upload PDFs, Markdown files, or CSVs and ask natural language questions to retrieve relevant information.',
+            "Upload PDFs, Markdown files, or CSVs and ask natural language questions to retrieve relevant information.",
     },
     {
-        title: 'CSV Data Analysis',
+        title: "CSV Data Analysis",
         description:
-            'Ask the chatbot to analyze datasets, generate summaries, or even create charts from CSV files.',
+            "Ask the chatbot to analyze datasets, generate summaries, or even create charts from CSV files.",
     },
     {
-        title: 'Secure File Handling',
+        title: "Secure File Handling",
         description:
-            'Uploaded files are processed securely and temporarily — your data privacy is our top priority.',
+            "Uploaded files are processed securely and temporarily — your data privacy is our top priority.",
     },
     {
-        title: 'Streaming Chat Experience',
+        title: "Streaming Chat Experience",
         description:
-            'Get real-time responses with typing animation for a dynamic and engaging conversation experience.',
+            "Get real-time responses with typing animation for a dynamic and engaging conversation experience.",
     },
 ];
 

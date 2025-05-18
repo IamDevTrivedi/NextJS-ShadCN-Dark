@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { Bot } from 'lucide-react';
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Bot } from "lucide-react";
 
 export function TelegramBotPromo() {
     return (

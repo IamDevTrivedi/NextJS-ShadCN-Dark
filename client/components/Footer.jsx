@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     Info,
     Shield,
@@ -10,63 +10,63 @@ import {
     Mail,
     Instagram,
     Linkedin,
-} from 'lucide-react';
-import Link from 'next/link';
-import { Button } from './ui/button';
+} from "lucide-react";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 const navigationLinks = [
     {
-        href: '/',
+        href: "/",
         icon: <Home size={16} />,
-        label: 'Home',
+        label: "Home",
     },
     {
-        href: '/about',
+        href: "/about",
         icon: <Info size={16} />,
-        label: 'About',
+        label: "About",
     },
     {
-        href: '/contact',
+        href: "/contact",
         icon: <Mail size={16} />,
-        label: 'Contact',
+        label: "Contact",
     },
     {
-        href: '/privacy-policy',
+        href: "/privacy-policy",
         icon: <Shield size={16} />,
-        label: 'Privacy Policy',
+        label: "Privacy Policy",
     },
     {
-        href: '/terms-of-services',
+        href: "/terms-of-services",
         icon: <FileText size={16} />,
-        label: 'Terms of Services',
+        label: "Terms of Services",
     },
     {
-        href: '/chat',
+        href: "/chat",
         icon: <MessageCircle size={16} />,
-        label: 'Chat',
+        label: "Chat",
     },
 ];
 
 const socialLinks = [
     {
-        href: '#',
+        href: "#",
         icon: <Twitter size={20} />,
-        label: 'Twitter',
+        label: "Twitter",
     },
     {
-        href: '#',
+        href: "#",
         icon: <Mail size={20} />,
-        label: 'Email',
+        label: "Email",
     },
     {
-        href: '#',
+        href: "#",
         icon: <Instagram size={20} />,
-        label: 'Instagram',
+        label: "Instagram",
     },
     {
-        href: '#',
+        href: "#",
         icon: <Linkedin size={20} />,
-        label: 'LinkedIn',
+        label: "LinkedIn",
     },
 ];
 
@@ -134,7 +134,7 @@ const Footer = () => {
                         <h3 className="text-lg font-bold mb-4">Connect With Us</h3>
                         <div className="flex flex-wrap gap-3">
                             {socialLinks.map((social, idx) => (
-                                <Button variant={'ghost'} className={'border border-muted'}>
+                                <Button variant={"ghost"} className={"border border-muted"}>
                                     <a key={idx} href={social.href} aria-label={social.label}>
                                         {social.icon}
                                     </a>

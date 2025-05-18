@@ -1,6 +1,6 @@
-import nodemailer from 'nodemailer';
-import logger from '../utils/logger.utils.js';
-import config from './config.js';
+import nodemailer from "nodemailer";
+import logger from "../utils/logger.utils.js";
+import config from "./config.js";
 
 const transporter = nodemailer.createTransport({
     host: config.EMAIL_HOST,
@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 transporter.verify((error, success) => {
     if (error) {
-        logger.error({ message: 'Nodemailer configuration error:', error });
+        logger.error({ message: "Nodemailer configuration error:", error });
     }
 });
 

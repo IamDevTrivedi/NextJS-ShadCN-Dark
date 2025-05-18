@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 import {
     DropdownMenu,
@@ -9,9 +9,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuShortcut,
     DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function ChatSidebarFooter() {
     return (
@@ -21,8 +21,8 @@ export function ChatSidebarFooter() {
                     className="w-full flex items-center justify-around px-5 outline-none focus:ring-0"
                     variant="secondary"
                 >
-                    <Avatar className={'my-1'}>
-                        <AvatarFallback className={'bg-background'}>CN</AvatarFallback>
+                    <Avatar className={"my-1"}>
+                        <AvatarFallback className={"bg-background"}>CN</AvatarFallback>
                     </Avatar>
                     <span>[--User's Name]</span>
                 </Button>

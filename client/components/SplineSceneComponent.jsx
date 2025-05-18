@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { SplineScene } from '@/components/ui/splite';
-import { Button } from './ui/button';
-import Link from 'next/link';
-import { useCallback } from 'react';
+import { SplineScene } from "@/components/ui/splite";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { useCallback } from "react";
 
 export function SplineSceneComponent() {
     const scrollToSection = useCallback(() => {
-        const el = document.getElementById('Core-Functionalities');
+        const el = document.getElementById("Core-Functionalities");
         console.log(el);
         if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
         }
     }, []);
 

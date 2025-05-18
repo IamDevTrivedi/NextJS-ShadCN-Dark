@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Mail, MapPin, Phone } from 'lucide-react';
-import { toast } from 'sonner';
-import { ArrowLeft } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { toast } from "sonner";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,31 +33,31 @@ export default function ContactPage() {
         try {
             const formData = new FormData(e.target);
 
-            formData.append('access_key', process.env.NEXT_PUBLIC_WEB3_FORM_API_KEY);
+            formData.append("access_key", process.env.NEXT_PUBLIC_WEB3_FORM_API_KEY);
 
             const response = await fetch(process.env.NEXT_PUBLIC_WEB3_FORM_API_URL, {
-                method: 'POST',
+                method: "POST",
                 body: formData,
             });
 
             const data = await response.json();
 
-            toast('Message sent successfully', {
+            toast("Message sent successfully", {
                 description: "We'll get back to you as soon as possible",
                 action: {
-                    label: 'Close',
-                    onClick: () => console.log('Close'),
+                    label: "Close",
+                    onClick: () => console.log("Close"),
                 },
             });
 
             setFormData({
-                name: '',
-                email: '',
-                subject: '',
-                message: '',
+                name: "",
+                email: "",
+                subject: "",
+                message: "",
             });
         } catch (error) {
-            toast('Error occured while submitting the form');
+            toast("Error occured while submitting the form");
         } finally {
             setIsSubmitting(false);
         }
@@ -89,7 +89,7 @@ export default function ContactPage() {
                 <div className="w-10" />
             </header>
 
-            <Separator className={'mb-4'} />
+            <Separator className={"mb-4"} />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Contact Information Cards */}
@@ -209,7 +209,7 @@ export default function ContactPage() {
                                     disabled={isSubmitting}
                                     size="lg"
                                 >
-                                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                                    {isSubmitting ? "Sending..." : "Send Message"}
                                 </Button>
                             </form>
                         </CardContent>

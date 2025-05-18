@@ -1,31 +1,31 @@
 // ./controller/health.controller.js
 
-import logger from '../utils/logger.utils.js';
-import os from 'os';
-import mongoose from 'mongoose';
+import logger from "../utils/logger.utils.js";
+import os from "os";
+import mongoose from "mongoose";
 
 const healthController = {
     basicHealthCheck: async (req, res) => {
-        logger.get({ message: 'health > basicHealthCheck', req });
+        logger.get({ message: "health > basicHealthCheck", req });
 
         try {
             return res.status(200).json({
-                status: 'healthy',
+                status: "healthy",
                 timestamp: new Date().toISOString(),
             });
         } catch (error) {
-            logger.error('Health check failed:', error);
-            return res.status(500).json({ status: 'error' });
+            logger.error("Health check failed:", error);
+            return res.status(500).json({ status: "error" });
         }
     },
 
     detailedHealthCheck: async (req, res) => {
-        logger.get({ req, message: 'health > detailedHealthCheck' });
+        logger.get({ req, message: "health > detailedHealthCheck" });
 
         try {
             const uptime = process.uptime();
             const systemInfo = {
-                status: 'healthy',
+                status: "healthy",
                 uptime: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m`,
                 timestamp: new Date().toISOString(),
                 memory: {
@@ -36,18 +36,18 @@ const healthController = {
             };
             return res.status(200).json(systemInfo);
         } catch (error) {
-            logger.error('Detailed health check failed:', error);
-            return res.status(500).json({ status: 'error' });
+            logger.error("Detailed health check failed:", error);
+            return res.status(500).json({ status: "error" });
         }
     },
 
     memoryCheck: async (req, res) => {
-        logger.get({ req, message: 'health > memoryCheck' });
+        logger.get({ req, message: "health > memoryCheck" });
 
         try {
             const used = process.memoryUsage();
             return res.status(200).json({
-                status: 'healthy',
+                status: "healthy",
                 memory: {
                     heapUsed: `${Math.round(used.heapUsed / 1024 / 1024)} MB`,
                     heapTotal: `${Math.round(used.heapTotal / 1024 / 1024)} MB`,
@@ -55,24 +55,24 @@ const healthController = {
                 },
             });
         } catch (error) {
-            logger.error('Memory check failed:', error);
-            return res.status(500).json({ status: 'error' });
+            logger.error("Memory check failed:", error);
+            return res.status(500).json({ status: "error" });
         }
     },
 
     databaseCheck: async (req, res) => {
-        logger.get({ message: 'health > databaseCheck', req });
+        logger.get({ message: "health > databaseCheck", req });
 
         try {
             const dbState = mongoose.connection.readyState;
             const states = {
-                0: 'disconnected',
-                1: 'connected',
-                2: 'connecting',
-                3: 'disconnecting',
+                0: "disconnected",
+                1: "connected",
+                2: "connecting",
+                3: "disconnecting",
             };
             return res.status(200).json({
-                status: 'healthy',
+                status: "healthy",
                 database: {
                     state: states[dbState],
                     name: mongoose.connection.name,
@@ -80,8 +80,8 @@ const healthController = {
                 },
             });
         } catch (error) {
-            logger.error('Database check failed:', error);
-            return res.status(500).json({ status: 'error' });
+            logger.error("Database check failed:", error);
+            return res.status(500).json({ status: "error" });
         }
     },
 };

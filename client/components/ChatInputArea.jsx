@@ -1,17 +1,17 @@
-'use client';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { SendIcon } from 'lucide-react';
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { SendIcon } from "lucide-react";
 
 export default function ChatInputArea() {
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!input.trim()) return;
         alert(`You typed: ${input}`);
-        setInput('');
+        setInput("");
     };
 
     return (

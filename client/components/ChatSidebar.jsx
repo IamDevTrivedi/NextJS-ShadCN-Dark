@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
     Sidebar,
@@ -7,44 +7,44 @@ import {
     SidebarGroup,
     SidebarGroupLabel,
     SidebarHeader,
-} from '@/components/ui/sidebar';
+} from "@/components/ui/sidebar";
 
-import Link from 'next/link';
+import Link from "next/link";
 
-import { ChatSidebarFooter } from './ChatSidebarFooterDD';
+import { ChatSidebarFooter } from "./ChatSidebarFooterDD";
 
-import { Button } from './ui/button';
+import { Button } from "./ui/button";
 
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
-import { MoreVertical } from 'lucide-react';
+import { MoreVertical } from "lucide-react";
 
 // Dummy user chats
 const usersChat = [
     {
-        SidebarGroupLabel: 'Today',
+        SidebarGroupLabel: "Today",
         items: [
-            { name: 't-1', href: '/chat/t-1' },
-            { name: 't-2', href: '/chat/t-2' },
+            { name: "t-1", href: "/chat/t-1" },
+            { name: "t-2", href: "/chat/t-2" },
         ],
     },
     {
-        SidebarGroupLabel: 'Last 7 days',
+        SidebarGroupLabel: "Last 7 days",
         items: [
-            { name: '7-1', href: '/chat/7-1' },
-            { name: '7-2', href: '/chat/7-2' },
+            { name: "7-1", href: "/chat/7-1" },
+            { name: "7-2", href: "/chat/7-2" },
         ],
     },
     {
-        SidebarGroupLabel: 'Last 30 Days',
+        SidebarGroupLabel: "Last 30 Days",
         items: [
-            { name: '30-1', href: '/chat/30-1' },
-            { name: '30-2', href: '/chat/30-2' },
+            { name: "30-1", href: "/chat/30-1" },
+            { name: "30-2", href: "/chat/30-2" },
         ],
     },
 ];
